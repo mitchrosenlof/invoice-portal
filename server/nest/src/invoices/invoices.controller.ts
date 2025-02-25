@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { InvoicesService } from './invoices.service';
 import { Prisma } from '@prisma/client';
 
@@ -12,14 +12,14 @@ export class InvoicesController {
   }
 
   @Get()
-  findAll() {
-    return this.invoicesService.findAll();
+  findAll(@Body() findAllInvoicesDto: { userId: number }) {
+    return this.invoicesService.findAll(findAllInvoicesDto.userId);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.invoicesService.findOne(+id);
-  }
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   return this.invoicesService.findOne(+id);
+  // }
 
   // @Patch(':id')
   // update(@Param('id') id: string, @Body() updateInvoiceDto: UpdateInvoiceDto) {

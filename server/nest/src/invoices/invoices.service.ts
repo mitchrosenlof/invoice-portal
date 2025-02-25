@@ -12,14 +12,19 @@ export class InvoicesService {
     })
   }
 
-  async findAll() {
-    return this.databaseService.invoice.findMany({});
+  async findAll(userId: number) {
+    return this.databaseService.invoice.findMany({
+      where: {
+        user_id: userId
+      },
+    });
   }
 
-  async findOne(id: number) {
+  async findOne(userId: number, id: number) {
     return this.databaseService.invoice.findUnique({
       where: {
         id,
+        user_id: userId
       }
     });
   }

@@ -1,5 +1,6 @@
 import { Prisma, PrismaClient } from "@prisma/client";
 import { withAccelerate } from "@prisma/extension-accelerate";
+import * as bcrypt from "bcrypt";
 
 const prisma = new PrismaClient().$extends(withAccelerate());
 
@@ -22,10 +23,11 @@ async function main() {
   await clear();
 
   // Seed the database with users and posts
+  const passwordHash = await bcrypt.hash("12345", 5);
   const user1 = await prisma.user.create({
     data: {
       email: "user@gmail.com",
-      password: "12345",
+      password: passwordHash,
       name: "Test",
     },
   });

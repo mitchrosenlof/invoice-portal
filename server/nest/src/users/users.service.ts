@@ -12,10 +12,10 @@ export class UsersService {
     });
   }
 
-  async findOne(id: number) {
+  async findOne(email: string) {
     return this.databaseService.user.findUnique({
       where: {
-        id,
+        email,
       }
     });
   }
