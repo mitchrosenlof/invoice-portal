@@ -3,7 +3,7 @@ A local application that allows a user to login and view their pending invoices.
 
 # Getting started
 
-## Prerequisities
+## Prerequisites
 - NodeJs >= 20 (https://github.com/nodenv/nodenv)
 - Docker and Docker Compose (https://docs.docker.com/compose/install/)
 
