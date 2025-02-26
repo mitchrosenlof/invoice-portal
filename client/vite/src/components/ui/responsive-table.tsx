@@ -1,14 +1,14 @@
 import {
-	ArrowPathRoundedSquareIcon,
 	ChevronDownIcon,
 	ChevronUpDownIcon,
 	ChevronUpIcon,
 	InformationCircleIcon,
-	PlusIcon,
 } from '@heroicons/react/24/outline';
 import React, { JSX, useEffect, useState } from 'react';
-import { sortAlphaNum } from '../util';
+import { sortAlphaNum } from '../../util';
 import Button from './button';
+
+
 const ResponsiveTable = (props: {
 	title?: string;
 	data: any[];

@@ -1,0 +1,1 @@
+export type View = "Home" | "Invoices" | "Bills" | "Expenses" | "Reports";
