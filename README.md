@@ -10,7 +10,7 @@ A local application that allows a user to login and view their pending invoices.
 ## Steps for running application
 ### Backend (Nest/Prisma/Docker/Postgres)
 1. Navigate to /server/nest
-2. Place `.env` file here
+2. Place `.env` file here (reach out to me if you have not recieved it)
 3. Run `docker compose -f docker-compose.postgres.yml up -d`
 4. Run `npm i && npm run db:deploy`
 5. Run `npm run db:seed`
