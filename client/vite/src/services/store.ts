@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import authReducer from './invoices/layout';
+import authReducer from './auth/layout';
 import { invoicesApiSlice } from './invoices/api';
 
 export const store = configureStore({

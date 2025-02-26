@@ -1,7 +1,7 @@
 import React, { Dispatch, JSX, SetStateAction, useState } from 'react';
 import { useLoginMutation } from '../services/invoices/api';
 import { useDispatch } from 'react-redux';
-import { setToken } from '../services/invoices/layout';
+import { setUser} from '../services/auth/layout';
 import { ChevronRightIcon } from '@heroicons/react/16/solid';
 
 type Props = {
@@ -18,8 +18,10 @@ const LoginForm = ({ setRoute }: Props): JSX.Element => {
   const handleSubmit = async (event: React.SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
     const res = await login({ email, password });
-    if (res.data?.access_token) {
-      dispatch(setToken(res.data.access_token)); 
+    console.log(res)
+    if (res.data?.access_token && res.data.email) {
+      const { access_token: token, email } = res.data;
+      dispatch(setUser({ token, email })); 
       setRoute("Dashboard");
     } else {
       setErrorMsg('User not found. Please try again.')
@@ -28,7 +30,7 @@ const LoginForm = ({ setRoute }: Props): JSX.Element => {
 
   return (
     <div className="relative h-screen w-full flex justify-center items-center">
-      <img src="public/login-bg.jpg" className="absolute bg-cover brightness-80"/>
+      <img src="public/login-bg.jpg" className="absolute bg-fit brightness-80"/>
       <div className="absolute text-black italic font-bold right-1/4 top-20 text-5xl">Sign in to view your invoices.</div>
       <div className="h-[300px] w-[400px] rounded bg-linear-to-br from-teal-400 to-sky-400 to-90% border border-black p-3 opacity-90 flex justify-center items-center">
         <form onSubmit={handleSubmit}>
