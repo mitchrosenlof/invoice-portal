@@ -28,13 +28,4 @@ export class InvoicesService {
       }
     });
   }
-
-  // update(id: number, updateInvoiceDto: Prisma.InvoiceUpdateInput) {
-  //   return this.databaseService.invoice.update({
-  //     where: {
-  //       id,
-  //     },
-  //     data: updateInvoiceDto,
-  //   });
-  // }
 }

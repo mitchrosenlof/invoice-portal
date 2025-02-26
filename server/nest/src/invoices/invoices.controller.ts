@@ -1,28 +1,31 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, UseGuards, Request } from '@nestjs/common';
 import { InvoicesService } from './invoices.service';
 import { Prisma } from '@prisma/client';
+import { UsersService } from 'src/users/users.service';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('invoices')
 export class InvoicesController {
-  constructor(private readonly invoicesService: InvoicesService) {}
+  constructor(private readonly invoicesService: InvoicesService, private readonly usersService: UsersService) {}
 
   @Post()
   create(@Body() createInvoiceDto: Prisma.InvoiceCreateInput) {
     return this.invoicesService.create(createInvoiceDto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get()
-  findAll(@Body() findAllInvoicesDto: { userId: number }) {
-    return this.invoicesService.findAll(findAllInvoicesDto.userId);
+  async getInvoices(@Request() req) {
+    const user = await this.usersService.findOne(req.user.email);
+    const invoices = await this.invoicesService.findAll(user!.id);
+    return invoices;
   }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.invoicesService.findOne(+id);
-  // }
-
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateInvoiceDto: UpdateInvoiceDto) {
-  //   return this.invoicesService.update(+id, updateInvoiceDto);
-  // }
+  @UseGuards(JwtAuthGuard)
+  @Get(':id')
+  async getInvoice(@Request() req, @Param('id') id: string) {
+    const user = await this.usersService.findOne(req.user.email);
+    const invoices = await this.invoicesService.findOne(user!.id, +id);
+    return invoices;
+  }
 }
