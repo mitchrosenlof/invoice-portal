@@ -8,23 +8,13 @@ import DashboardPage from './pages/dashboard';
 
 const App = (): JSX.Element => {
   const dispatch = useDispatch();
-  const token = useSelector((state: RootState) => { console.log(state); return state.auth.token });
+  const token = useSelector((state: RootState) => state.auth.token);
   const [route, setRoute] = useState<"Login" | "Dashboard">(token ? "Dashboard" : "Login");
-  const [currToken, setCurrToken] = useState(token);
 
   const logout = () => {
     dispatch(clearUser());
     setRoute("Login");
   }
-  useEffect(() => {
-    console.log(token, currToken)
-    if (!token || (currToken && token !== currToken)) {
-      logout();
-    }
-    if (token) {
-      setCurrToken(token);
-    }
-  }, [token, currToken])
 
   return (
     <>

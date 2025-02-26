@@ -8,7 +8,7 @@
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"**/*.ts\"",
-    "db:seed": "ts-node seed-database.ts",
+    "db:seed": "npx ts-node seed-database.ts",
     "db:deploy": "npx prisma migrate deploy && npx prisma generate",
     "start": "nest start",
     "start:dev": "nest start --watch",

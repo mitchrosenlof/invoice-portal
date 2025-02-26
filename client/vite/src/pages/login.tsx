@@ -18,7 +18,6 @@ const LoginForm = ({ setRoute }: Props): JSX.Element => {
   const handleSubmit = async (event: React.SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
     const res = await login({ email, password });
-    console.log(res)
     if (res.data?.access_token && res.data.email) {
       const { access_token: token, email } = res.data;
       dispatch(setUser({ token, email })); 
